@@ -21,7 +21,7 @@ public class Menu {
             //显示主菜单
             System.out.println("---羽毛球世界---");
             System.out.println("*************************************");
-            System.out.println("1.新手\n2.业余爱好者\n3.商品\n4.俱乐部\n0.退出");
+            System.out.println("1.新手\n2.业余爱好者\n3.俱乐部\n0.退出");
             System.out.println("*************************************");
             System.out.println("请输入数字");
             int choice = input.nextInt();
@@ -82,7 +82,7 @@ public class Menu {
         do {
             System.out.println("---爱好者天堂---");
             System.out.println("*************************************");
-            System.out.println("1.球拍\n2.球鞋\n3.运动员\n4.返回上一层");
+            System.out.println("1.商品\n2.运动员\n3.返回上一层");
             System.out.println("*************************************");
             System.out.println("请输入数字,按0退出");
             int choice = input.nextInt();
@@ -110,13 +110,15 @@ public class Menu {
     //展示商品
     public void showProductsMenu(){
         do{
-        System.out.println("""
+                System.out.println("""
                 ---商品清单---
                 1.球拍
                 2.球鞋
                 3.已选球拍
                 4.已选球鞋
+                5.返回上一级
                 """);
+
         int choice= input.nextInt();
         switch (choice){
             case 1:
@@ -131,6 +133,8 @@ public class Menu {
             case 4:
                 ListShoes();
                 break;
+            case 5:
+                return;    
             default:
                 System.out.println("输入错误");
                 break;
@@ -179,7 +183,35 @@ public void ListShoes(){
             "\t"+productShoe.ShoeType);
 }
 }
+public void showAthleteNational(){
+        System.out.println("""
+                1.China
+                2.Japan
+                3.Korea
+                4.Malaysia
+                5.Denmark
+                6.return
+                """);
+        int choice=input.nextInt();
+        switch (choice){
+            case 1:
+                China();
+            case 2:
+                Japan();
+            case 3:
+                Korea();
+            case 4:
+                Malaysia();
+            case 5:
+                Denmark();
+            case 6:
+            case 0:
+                System.exit(0);
+        }
+    }
+    public void CreateClub(){
 
+    }
 
 
     }
