@@ -212,6 +212,21 @@ public void showAthleteNational(){
     public void CreateClub(){
 
     }
+    public void China(){
+
+    }
+    public void Japan(){
+
+    }
+    public void Korea(){
+
+    }
+    public void Malaysia(){
+
+    }
+    public void Denmark(){
+        
+    }
 
 
     }
