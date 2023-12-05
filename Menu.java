@@ -3,8 +3,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Menu {
-    static List<ProductRacket> Productracket=new ArrayList<>();
-    static List<ProductShoe> Productshoe=new ArrayList<>();
+    List<ProductRacket> Productracket=new ArrayList<>();
+    List<ProductShoe> Productshoe=new ArrayList<>();
 
     public static void main(String[] args){
 
@@ -142,18 +142,53 @@ public class Menu {
     }while (true);
     }
 public void showProductRacketMenu() {
-        System.out.println("请输入品牌");
-        String brand=input.nextLine();
-        System.out.println("请输入名称");
-        String name = input.nextLine();
-        System.out.println("请输入平衡点");
-        String balance = input.nextLine();
-        System.out.println("请输入中杆硬度");
-        String handle = input.nextLine();
-        System.out.println("请输入类型");
-        String type = input.nextLine();
-        ProductRacket productRacket=new ProductRacket(brand,name,balance,handle,type);
-        Productracket.add(productRacket);
+        do {
+            System.out.println("""
+                    ----------------------------
+                    Choose the rackets
+                    Press the button to continue
+                    1.Type in the information
+                    0.Exit
+                    ----------------------------
+                    """);
+            int i=input.nextInt();
+            switch (i) {
+                case 1:
+                    //ask user to type in the brand and get the brand
+                    System.out.println("""
+                        Type in the brand
+                        (Yonex, Victor, Lining)""");
+                    String nothing1=input.nextLine();
+                    String brand = input.nextLine();
+                    //ask user to type in the name and get the name
+                    System.out.println("Type in the name");
+                    String name = input.nextLine();
+                    String nothing2=input.nextLine();
+                    //ask user to type in the balance point and get it
+                    System.out.println("""
+                        Type in the balance point
+                        (xxx milimeter,often between 280 to 320)""");
+                    String BalancePoint = input.nextLine();
+                    String nothing3=input.nextLine();
+                    //ask user to type in the rigidity of handle and get it
+                    System.out.println("""
+                        Type in the rigidity of handle
+                        (0 t 8)""");
+                    String RigidityOfHandle = input.nextLine();
+                    String nothing4=input.nextLine();
+                    //ask user to type in the category and get it
+                    System.out.println("""
+                        Type in the category
+                        (attack,balance,velocity)""");
+                    String RacketCategory = input.nextLine();
+                    String nothing5=input.nextLine();
+                    ProductRacket productRacket = new ProductRacket(brand,name,BalancePoint,RigidityOfHandle,RacketCategory);
+                    Productracket.add(productRacket);
+                    break;
+                case 0:
+                    return;
+            }
+        }while (true);
     }
     public void ListRackets(){
         //print the information about the racket
