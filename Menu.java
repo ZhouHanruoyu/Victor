@@ -13,10 +13,10 @@ public class Menu {
     public Menu(){
         showMainMenu();
     }
-    //显示登录菜单
 
     //显示主菜单
     public void showMainMenu(){
+        //use endless loop to call the menu until the user want to exit
         do {
             //显示主菜单
             System.out.println("---羽毛球世界---");
@@ -155,6 +155,7 @@ public void showProductRacketMenu() {
             switch (i) {
                 case 1:
                     //ask user to type in the brand and get the brand
+                    //variable "nothing" here is to avoid a bug, because I haven't found another way to tackle.
                     System.out.println("""
                         Type in the brand
                         (Yonex, Victor, Lining)""");
@@ -182,7 +183,9 @@ public void showProductRacketMenu() {
                         (attack,balance,velocity)""");
                     String RacketCategory = input.nextLine();
                     String nothing5=input.nextLine();
+                    //assign "ProductRacket"
                     ProductRacket productRacket = new ProductRacket(brand,name,BalancePoint,RigidityOfHandle,RacketCategory);
+                    //add"ProductRacket" to the arraylist"Productracket"
                     Productracket.add(productRacket);
                     break;
                 case 0:
@@ -191,33 +194,65 @@ public void showProductRacketMenu() {
         }while (true);
     }
     public void ListRackets(){
+        int size1=Productracket.size();
         //print the information about the racket
         System.out.println("--Racket you have chosen:--");
+        //walk through the arraylist"Productracket"
+        //foreach loop
         for (ProductRacket productRacket:Productracket){
             System.out.println("You choose "+productRacket.brand+"'s racket:" +
                     productRacket.name+",the balance point is "+
                     productRacket.BalancePoint+"mm"+",the rigidity of handle is "+
                     productRacket.RigidityOfHandle+
-                    ","+productRacket.RacketCategory+" category.");
+                    ","+productRacket.RacketCategory+" category."+"\n"+
+                    "You have chosen "+size1+" rackets.");
         }
     }
     public void showProductShoeMenu(){
-    System.out.println("请输入品牌");
-    String brand=input.nextLine();
-    System.out.println("请输入名称");
-    String name = input.nextLine();
-    System.out.println("请输入类型");
-    String type = input.nextLine();
-    ProductShoe productShoe=new ProductShoe(brand,name,type);
+        do {
+            System.out.println("""
+                    Choose the badminton shoes
+                    1.Type in the information
+                    0.Exit
+                    """);
+            int i=input.nextInt();
+            switch (i) {
+                case 1:
+                    //ask user to type in the brand and get the brand
+                    System.out.println("""
+                        Type in the brand
+                        (Yonex, Victor, Lining)""");
+                    String brand=input.nextLine();
+                    //ask user to type in the name and get it
+                    System.out.println("Type in the name");
+                    String name = input.nextLine();
+                    //ask user to type in the category and get it
+                    System.out.println("""
+                        Type in the category
+                        (attack,balance,velocity)""");
+                    String category = input.nextLine();
+                    ProductShoe productShoe=new ProductShoe(brand,name,category);
+                    Productshoe.add(productShoe);
+
+                    break;
+                case 0:
+                    return;
+            }
+        }while (true);
     }
 
 public void ListShoes(){
         //print the information about the shoes
-        System.out.println("---您选择的羽毛球鞋有---");
+        //get the amounts of product
+        int size2=Productshoe.size();
+        System.out.println("---The badminton shoes you have chosen:---");
+        //walk through the arraylist"Productshoe"
+        //foreach loop
         for (ProductShoe productShoe:Productshoe){
         System.out.println("You choose "+productShoe.brand+"'s shoes:"+
             productShoe.name+","+
-            productShoe.ShoeCategory+" category.");
+            productShoe.ShoeCategory+" category."+"\n"+
+                "You have chosen "+size2+" pairs of shoes.");
       }
     }
 public void showAthleteNational(){
