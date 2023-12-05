@@ -390,7 +390,26 @@ public void showProductRacketMenu() {
         System.out.println("You have chosen "+size2+" shoes.");
     }
     public void DeleteShoes(){
-
+        if (Productshoe.isEmpty()){
+            System.out.println("Their exist no shoes in your shopping cart.");
+            return;
+        }
+        ListShoes();
+        System.out.println(
+                "Type in the number (1 to "+Productshoe.size()+" ),before the shoes you want to delete."
+        );
+        int deletenumber2=input.nextInt();
+        input.nextLine();
+        if (deletenumber2>=1 && deletenumber2<=Productshoe.size()){
+            Productshoe.remove(deletenumber2-1);
+            System.out.println("Delete successfully,press any button to continue.");
+            input.nextLine();
+        }
+        else {
+            System.out.println("Delete unsuccessfully, try again and ensure you have enter true number.");
+            System.out.println("Press any button to continue.");
+            input.nextLine();
+        }
     }
     public void showAthleteNational(){
         System.out.println("""
