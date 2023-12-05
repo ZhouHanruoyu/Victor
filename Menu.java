@@ -156,13 +156,14 @@ public void showProductRacketMenu() {
         Productracket.add(productRacket);
     }
     public void ListRackets(){
-        System.out.println("--您选择的球拍有--");
+        //print the information about the racket
+        System.out.println("--Racket you have chosen:--");
         for (ProductRacket productRacket:Productracket){
-            System.out.println(productRacket.brand+
-                    "\t"+productRacket.name+
-                    "\t"+productRacket.BlancePoint+
-                    "\t"+productRacket.RigidityOfHandle+
-                    "\t"+productRacket.RacketType);
+            System.out.println("You choose "+productRacket.brand+"'s racket:" +
+                    productRacket.name+",the balance point is "+
+                    productRacket.BalancePoint+"mm"+",the rigidity of handle is "+
+                    productRacket.RigidityOfHandle+
+                    ","+productRacket.RacketCategory+" category.");
         }
     }
     public void showProductShoeMenu(){
@@ -176,13 +177,14 @@ public void showProductRacketMenu() {
     }
 
 public void ListShoes(){
-   System.out.println("---您选择的羽毛球鞋有---");
-   for (ProductShoe productShoe:Productshoe){
-    System.out.println(productShoe.brand+
-            "\t"+productShoe.name+
-            "\t"+productShoe.ShoeType);
-}
-}
+        //print the information about the shoes
+        System.out.println("---您选择的羽毛球鞋有---");
+        for (ProductShoe productShoe:Productshoe){
+        System.out.println("You choose "+productShoe.brand+"'s shoes:"+
+            productShoe.name+","+
+            productShoe.ShoeCategory+" category.");
+      }
+    }
 public void showAthleteNational(){
         System.out.println("""
                 1.China
