@@ -444,8 +444,62 @@ public void showProductRacketMenu() {
                 System.exit(0);
         }
     }
-    public void CreateClub(){
+    public void ClubManagement(){
+        do {
+            System.out.println("""
+                    Club Management System:
+                    1.Create a new club
+                    2.Enter the existed club
+                    3.Dissolve a club
+                    4.return
+                    """);
+            int choice= input.nextInt();
+            switch (choice){
+                case 1:
+                    CreateClub();
+                    break;
+                case 2:
+                    ParticipateClub();
+                    break;
+                case 3:
+                    DissolveClub();
+                    break;
+                case 4:
+                    return;
+                case 0:
+                    System.exit(0);
+                default :
+                    System.out.println("Invalid option entered:");
+                    break;
+            }
+        }while (true);
+    }
+    public void CreateClub() {
+        System.out.println("Please type in your new club's name:");
+        String ClubName = input.nextLine();
 
+        System.out.println("And type in the creation date (for example: YYYY-MM-DD,obey the rules year-month-day):");
+        String foundDate = input.nextLine();
+
+        Club club = new Club(ClubName, foundDate);
+        clubs.add(club);
+
+        System.out.println("Club created successfully!");
+        System.out.println("Press Enter to continue...");
+        input.nextLine(); 
+        //wait user to press the "Enter" 
+    }
+    public void DissolveClub(){
+        ListClubs();
+    }
+
+    public void ListClubs(){
+        for (Club club:clubs){
+            System.out.println("Clubs we have:"+"\n"+club.getName()+" (founded in "+club.getFoundDate());
+        }
+    }
+    public void ParticipateClub(){
+        
     }
     public void China(){
 
