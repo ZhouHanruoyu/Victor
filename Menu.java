@@ -15,6 +15,27 @@ public class Menu {
     public Menu(){
         showMainMenu();
     }
+    public void printIntroduction(){
+        System.out.println("---Introduction---");
+        System.out.println(Introduction.INTRODUCTION_TEXT1);
+        System.out.println(Introduction.INTRODUCTION_TEXT2);
+        System.out.println(Introduction.INTRODUCTION_TEXT3);
+        System.out.println(Introduction.INTRODUCTION_TEXT4);
+        System.out.println(Introduction.INTRODUCTION_TEXT5);
+        System.out.println("Press any button to continue.");
+        input.nextLine();
+    }
+    public void printRules(){
+        System.out.println("---Rules---");
+        System.out.println(Rules.RULES_TEXT1);
+        System.out.println(Rules.RULES_TEXT2);
+        System.out.println(Rules.RULES_TEXT3);
+        System.out.println(Rules.RULES_TEXT4);
+        System.out.println(Rules.RULES_TEXT5);
+        System.out.println(Rules.RULES_TEXT6);
+        System.out.println("Press any button to continue.");
+        input.nextLine();
+    }
     //显示登录菜单
 
     //显示主菜单
