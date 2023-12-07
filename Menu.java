@@ -6,9 +6,11 @@ public class Menu {
 
     List<ProductRacket> Productracket=new ArrayList<>();
     List<ProductShoe> Productshoe=new ArrayList<>();
-    List<Club>clubs=new ArrayList<>();
+    List<String>Club=new ArrayList<>();
+    List<String>Members=new ArrayList<>();
+
     Scanner input=new Scanner(System.in);
-    Club club=new Club("my club","2");
+
 
     public static void main(String[] args){
 
@@ -17,32 +19,37 @@ public class Menu {
     public Menu(){
         showMainMenu();
     }
-    //显示登录菜单
-
-    //显示主菜单
+    /*show main menu
+    there exists three functions in main menu:
+    green hands' beginner guide,amateur,club management.
+    whenever you want to exit program,press 0 .
+    press Enter button to continue when program stops.
+    */
     public void showMainMenu(){
         do {
-            //显示主菜单
-            System.out.println("---羽毛球世界---");
+            System.out.println("---||Badminton World||---");
             System.out.println("*************************************");
-            System.out.println("1.新手\n2.业余爱好者\n3.俱乐部\n0.退出");
+            System.out.println("1.Green hand\n2.Amateur\n3.Club\n0.Exit(Whenever you want to exit,type in 0.)");
             System.out.println("*************************************");
-            System.out.println("请输入数字");
-            String choice = input.nextLine();
+            System.out.println("Please type in the number");
+            System.out.println("Whenever the program stops, press Enter button to continue.");
+            /*
+            I turn the variable "choice"'s type to String
+            */
+            int choice = input.nextInt();
             input.nextLine();
             switch (choice) {
-                case "1":
+                case 1:
                     showGreenhandMenu();
                     break;
-                case "2":
+                case 2:
                     showAmateurMenu();
                     break;
-                case "3":
+                case 3:
                     ClubManagement();
                     break;
-                case "0":
-                    //返回上一级
-                    System.out.println("谢谢使用，下次见！");
+                case 0:
+                    System.out.println("Thank for using,see you!");
                     System.exit(0);
                 default :
                     System.out.println("Invalid option entered:");
@@ -52,42 +59,6 @@ public class Menu {
             }
         }while (true);
     }
-    public void showAthleteNational(){
-        System.out.println("""
-                1.China
-                2.Japan
-                3.Korea
-                4.Malaysia
-                5.Denmark
-                6.return
-                """);
-        int choice=input.nextInt();
-        input.nextLine();
-        switch (choice){
-            case 1:
-                China();
-                break;
-            case 2:
-                Japan();
-                break;
-            case 3:
-                Korea();
-                break;
-            case 4:
-                Malaysia();
-                break;
-            case 5:
-                Denmark();
-                break;
-            case 6:
-                return;
-            case 0:
-                System.exit(0);
-            default :
-                System.out.println("Invalid option entered:");
-                break;
-        }
-    }
     public void ClubManagement(){
         do {
             System.out.println("""
@@ -95,25 +66,32 @@ public class Menu {
                     1.Create a new club
                     2.Participate in existed club
                     3.Dissolve a club
-                    4.exit from a club
-                    5.return
+                    4.Exit from a club
+                    5.List clubs stored
+                    6.return
                     """);
             int choice= input.nextInt();
+            input.nextLine();
             switch (choice){
                 case 1:
                     CreateClub();
                     break;
                 case 2:
-                    ParticipateClub();
+                    AddClubMembers();
                     break;
                 case 3:
                     DissolveClub();
                     break;
                 case 4:
                     ExitClub();
+                    break;
                 case 5:
+                    ListClubAndMembers();
+                    break;
+                case 6:
                     return;
                 case 0:
+                    System.out.println("Thank for using,see you!");
                     System.exit(0);
                 default :
                     System.out.println("Invalid option entered:");
@@ -121,79 +99,101 @@ public class Menu {
             }
         }while (true);
     }
-    public void CreateClub() {
-        input.nextLine();
-        System.out.println("Please type in your new club's name:");
-        String ClubName = input.nextLine();
+    public void CreateClub(){
+        do {
+            input.nextLine();
+            System.out.println("""
+                -----------------
+                Enter in number;
+                Enter 1 to continue to create your club;
+                Enter 0 to exit.
+                """);
+            int i= input.nextInt();
+            input.nextLine();
+            switch (i){
+                case 1:
+                    System.out.println("Naming your club:");
+                    String ClubName=input.nextLine();
+                    Club.add(ClubName);
+                    if (!Club.isEmpty()){
+                        System.out.println("Club created successfully!");
+                    }else {
+                        System.out.println("Club haven't been created,please try again.");
+                    }
+                    break;
+                case 0:
+                    return;
+            }
+        }while (true);
+    }
+    public void AddClubMembers(){
+                    for (int i = 0; i < Club.size(); i++) {
+                        System.out.println((i + 1) + ")" + Club.get(i));
+                    }
+                    System.out.println("Choose a club you want to enter and type in the number before it.");
+                    int index=input.nextInt();
+                    input.nextLine();
+                    System.out.println("Then type in your name,type over when finish");
+                    while (true) {
+                        String MemberName = input.nextLine();
+                        if (MemberName.equalsIgnoreCase("over")){
+                            break;
+                        }
+                        String membername = Club.get(index - 1) + "." + MemberName;
+                        Members.add(membername);
+                    }
+            }
+    public void DissolveClub(){
 
-        System.out.println("And type in the creation date (year/month/day):");
-        String FoundDate = input.nextLine();
-
-        Club club = new Club(ClubName, FoundDate);
-        clubs.add(club);
-        System.out.println("Club created successfully!");
-        System.out.println("Press Enter to continue.");
-        input.nextLine();
-        System.out.println("Add members now?");
-        System.out.println("Type in y(yes) or n(no)");
-        String judge=input.nextLine();
-        if (judge.equalsIgnoreCase("y")){
-            ParticipateClub();
+    }
+    public void ListClubAndMembers(){
+        for (int i=0;i< Members.size();i++){
+            System.out.println("Club:"+Members.get(i));
         }
     }
-    public void DissolveClub(){
-        input.nextLine();
-        System.out.println("You want to dissolve your club?");
-        ListClubs();
-        System.out.println();
-    }
-
     public void ExitClub(){
 
     }
-    public void ListClubs(){
-        for (Club club:clubs){
-            System.out.println("Clubs we have:"+"\n"+club.getName()+" (founded in "+club.getFoundDate());
+    public void showAthlete() {
+        String[] player = {"Lin Dan", "Chen Long", "Shi Yu qi","Lee Chong wei","Victor Axelsen"};
+        /*endless loop
+        to make the function run repeatedly until user want to exit
+        * */
+        while (true) {
+            System.out.println("""
+                Press the athlete name to search(press over to return):
+                """);
+            //assign what user type in to variable"search",trim()is to erase meaningless contents
+            String search = input.nextLine().trim();
+            //create boolean variable"compare" to judge if what user type in exists in my program
+            boolean compare=false;
+            //when user type in "over",return to last menu,
+            if (search.equalsIgnoreCase("over")) {
+                return;
+            }
+            else{
+                for (String players:player) {
+                    if (players.contains(search)) {
+                        System.out.println(players);
+                        compare = true;
+                    }
+                  }
+                }
+            if (!compare){
+                System.out.println("Can't find the athlete you search");
+            }
+                System.out.println("Press any button to continue(press over to return)");
+                input.nextLine();
+            }
         }
-    }
-    public void ParticipateClub(){
-        input.nextLine();
-        System.out.println("Choose a club you want to participate in:");
-        System.out.println("Type the number before the club you want to join in.");
-        ListClubs();
-        int Join=input.nextInt();
-        input.nextLine();
-        if(Join>0&&Join<clubs.size()){
-            System.out.println("Type in your members' name.");
-            String Information=input.nextLine();
-           club.AddMembers(Information);
-        }
-
-    }
-
-    public void China(){
-
-    }
-    public void Japan(){
-
-    }
-    public void Korea(){
-
-    }
-    public void Malaysia(){
-
-    }
-    public void Denmark(){
-
-    }
     //显示新手菜单
     public void showGreenhandMenu(){
         do {
-            System.out.println("---新手指南---");
+            System.out.println("---Beginner Guide---");
             System.out.println("*************************************");
-            System.out.println("1.介绍\n2.规则\n3.装备推荐\n4.返回上一层");
+            System.out.println("1.Introduction\n2.Rules\n3.Equipment Recommend\n4.Return");
             System.out.println("*************************************");
-            System.out.println("请输入数字,按0退出");
+            System.out.println("Please type in the number,press 0 to exit.");
             int choice = input.nextInt();
             input.nextLine();
             switch (choice) {
@@ -210,6 +210,7 @@ public class Menu {
                     //返回上一级
                     return;
                 case 0:
+                    System.out.println("Thank for using,see you!");
                     System.exit(0);
                 default :
                     System.out.println("Invalid option entered:");
@@ -256,12 +257,13 @@ public class Menu {
                     showProductsMenu();
                     break;
                 case 2:
-                    showAthleteNational();
+                    showAthlete();
                     break;
                 case 3:
                     //返回上一级
                     return;
                 case 0:
+                    System.out.println("Thank for using,see you!");
                     System.exit(0);
                 default :
                     System.out.println("Invalid option entered:");
@@ -306,6 +308,7 @@ public class Menu {
             case 7:
                 return;
             case 0:
+                System.out.println("Thank for using,see you!");
                 System.exit(0);
             default :
                 System.out.println("Invalid option entered:");
@@ -539,6 +542,7 @@ public void showProductRacketMenu() {
                 case 2:
                     return;
                 case 0:
+                    System.out.println("Thank for using,see you!");
                     System.exit(0);
                 default :
                     System.out.println("Invalid option entered:");
@@ -585,3 +589,5 @@ public void showProductRacketMenu() {
         }
     }
 }
+
+
