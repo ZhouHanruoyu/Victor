@@ -1,18 +1,34 @@
-public class Introduction {
- public static final String INTRODUCTION_TEXT1 =  "Badminton is a kind of indoor sport of small ball games," ;
-    public static final String INTRODUCTION_TEXT2 = "which is made by hitting feathers and cork with a long-handled net racket across the net. Badminton is played on a rectangular court," ;
-    public static final String INTRODUCTION_TEXT3 = "with a net between the courts. Both sides use various techniques and tactics such as serving," ;
-    public static final String INTRODUCTION_TEXT4 = "hitting and moving to hit the ball back and forth on the net," ;
-    public static final String INTRODUCTION_TEXT5 = "so as not to make the ball fall into their effective area or make the other side make a mistake in hitting the ball.";
+import java.util.Scanner;
 
+public class Introduction {
+    Scanner input=new Scanner(System.in);
+    public static final String INTRODUCTION = """
+Badminton, also known as shuttlecock, is a popular indoor sport played between two or four players.
+It is believed to have originated in India and was introduced to England in the 19th century as a game called 'Poona'.
+The name 'badminton' was derived from the Duke of Beaufort's Badminton House in Gloucestershire, where the game was played.
+
+The modern game of badminton,originated in Birmingham,British,is played with lightweight rackets made of carbon fiber or other materials,
+and a shuttlecock made of goose feathers or synthetic materials.
+The objective of the game is to hit the shuttlecock over the net and into the opponent's court without them returning it.
+
+Badminton is a fast-paced and physically demanding sport that requires quick reflexes, agility, and endurance.
+There are several different types of shots in badminton, including the smash, drop shot, and clear.
+Players aim to use a combination of these shots to outmaneuver and outscore their opponents.
+
+ver the years, badminton has grown in popularity around the world and is now an Olympic sport.
+It is played at both amateur and professional levels, with international competitions;
+such as the BWF World Championships and the Thomas Cup attracting top players from all over the globe.
+
+Overall, badminton is a thrilling and exciting sport that requires skill, strategy, and athleticism.
+Whether you're a casual player or a serious competitor, there's always room for improvement and new challenges in this dynamic game.
+            """;
 
     public static String getIntroduction(){
-       return
-
-               INTRODUCTION_TEXT1+
-                       INTRODUCTION_TEXT2+
-                       INTRODUCTION_TEXT3+
-                       INTRODUCTION_TEXT4+
-                       INTRODUCTION_TEXT5;
-   }
+        return INTRODUCTION;
+    }
+    public static void printIntroduction(){
+        System.out.println("---------Introduction---------");
+        System.out.println(Introduction.getIntroduction());
+        System.out.println("Press any button to continue.");
+    }
 }
