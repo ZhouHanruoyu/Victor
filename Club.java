@@ -13,27 +13,38 @@ public class Club {
         input.nextLine();
         do {
             System.out.println("""
-                -----------------
-                Enter in number;
-                Enter 1 to continue to create your club;
-                Enter 0 to exit.
-                """);
-                int i= input.nextInt();
+                        \u001B[33m---------------------------------------\u001B[0m
+                    Enter in number:
+                    Enter \u001B[31m'1'\u001B[0m to continue to create your club;
+                    Enter \u001B[31m'0'\u001B[0m to exit.
+                    \u001B[33m---------------------------------------\u001B[0m
+                    """);
+            try {
+                int choice= input.nextInt();
                 input.nextLine();
-                switch (i){
+                switch (choice){
                     case 1:
-                        System.out.println("Naming your club:");
-                        String ClubName=input.nextLine();
+                        System.out.println(M.underline+"Naming your club:"+M.stop);
+                        String ClubName=input.nextLine().trim();
                         Club.add(ClubName);
                         if (!Club.isEmpty()){
-                            System.out.println("Club created successfully!");
+                            System.out.println(M.red+"Club created successfully!"+M.stop);
                         }else {
-                            System.out.println("Club haven't been created,please try again.");
+                            System.out.println(M.red+"Club haven't been created,please try again."+M.stop);
                         }
                         break;
                     case 0:
                         return;
+                    default:
+                        System.out.println(M.red+"Invalid option entered:"+M.stop+M.strikethrough+choice+M.stop);
+                        System.out.println(M.white+"Press any button to continue"+M.stop);
+                        input.nextLine();
+                        break;
                 }
+            }catch (Exception e){
+                System.out.println(M.red+"Invalid option entered."+M.stop+M.strikethrough+e+M.stop);
+                input.nextLine();
+            }
         }while (true);
     }
     public void AddClubMembers(Scanner input){
@@ -41,10 +52,10 @@ public class Club {
         for (int i = 0; i < Club.size(); i++) {
             System.out.println((i + 1) + ")" + Club.get(i));
         }
-        System.out.println("Choose a club you want to enter and type in the number before it.");
+        System.out.println(M.underline+M.italic+"Choose a club you want to enter and type in the number before it."+M.stop);
         int index=input.nextInt();
         input.nextLine();
-        System.out.println("Then type in your name,type over when finish");
+        System.out.println(M.underline+M.italic+"Then type in your name,type over when finish"+M.stop);
         while (true) {
             String MemberName = input.nextLine();
             if (MemberName.equalsIgnoreCase("over")){
@@ -59,35 +70,34 @@ public class Club {
         ListClubAndMembers(input);
         String dissolve;
         while (true) {
-            System.out.println("""
-                Press the member name to dissolve(press over to return):
-                """);
+            System.out.println(M.underline+"Type in the club name to dissolve"+M.stop
+                    +M.white+"\n(Type in 'over' to return):"+M.stop);
             //assign what user type in to variable"search",trim()is to erase meaningless contents
             dissolve = input.nextLine().trim();
 
             //create boolean variable"compare" to judge if what user type in exists in my program
             boolean compare=false;
-            String LowerCaseSearch=dissolve.toLowerCase();
+            String LowerCaseSearch=dissolve.toLowerCase().trim();
             //when user type in "over",return to last menu,
-            if (dissolve.equalsIgnoreCase("over")) {
-                return;
-            }
-            else{
-                for (int i=0;i< Members.size();i++) {
-                    if (Members.contains(dissolve)) {
-                        Members.remove(dissolve);
-                        compare = true;
-                    }else if (Members.contains(LowerCaseSearch)){
-                        Members.remove(dissolve);
-                        compare = true;
-                    }
+            for (int i=0;i<Members.size();i++) {
+                if (Members.get(i).contains(dissolve) || Members.get(i).toLowerCase().contains(LowerCaseSearch)) {
+                    Members.remove(i);
+                    compare = true;
+                    break; // stop loop after removing one match
                 }
             }
             if (!compare){
-                System.out.println("Can't find the member you search");
+                System.out.println(M.red+"Can't find the club you search"+M.stop);
+            } else {
+                System.out.println(M.red+"Club has been removed successfully."+M.stop);
             }
-            System.out.println("Press any button to continue(press over to return)");
-            input.nextLine();
+
+            System.out.println(M.underline+"Press any button to continue"+M.stop
+                    +M.white+"\n(type in over to return)"+M.stop);
+            String userInput = input.nextLine().trim();
+            if (userInput.equals("over")) {
+                break; // exit loop if user inputs "over"
+            }
         }
     }
     public void ListClubAndMembers(Scanner input){
@@ -101,15 +111,14 @@ public class Club {
         ListClubAndMembers(input);
         String exit;
         while (true) {
-            System.out.println("""
-            Type in the member name to dissolve(Type in 'over' to return):
-            """);
+            System.out.println(M.underline+"Type in the member name to exit"+M.stop
+                    +M.white+"\n(Type in 'over' to return):"+M.stop);
             //assign what user type in to variable"search",trim()is to erase meaningless contents
             exit = input.nextLine().trim();
 
             //create boolean variable"compare" to judge if what user type in exists in my program
             boolean compare=false;
-            String LowerCaseSearch=exit.toLowerCase();
+            String LowerCaseSearch=exit.toLowerCase().trim();
             //when user type in "over",return to last menu,
             for (int i=0;i<Members.size();i++) {
                 if (Members.get(i).contains(exit) || Members.get(i).toLowerCase().contains(LowerCaseSearch)) {
@@ -120,13 +129,14 @@ public class Club {
             }
 
             if (!compare){
-                System.out.println("Can't find the member you search");
+                System.out.println(M.red+"Can't find the member you search"+M.stop);
             } else {
-                System.out.println("Member has been removed successfully.");
+                System.out.println(M.red+"Member has been removed successfully."+M.stop);
             }
 
-            System.out.println("Press any button to continue(press over to return)");
-            String userInput = input.nextLine();
+            System.out.println(M.underline+"Press any button to continue"+M.stop
+                    +M.white+"\n(type in over to return)"+M.stop);
+            String userInput = input.nextLine().trim();
             if (userInput.equals("over")) {
                 break; // exit loop if user inputs "over"
             }
