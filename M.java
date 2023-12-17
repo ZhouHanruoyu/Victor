@@ -1,5 +1,5 @@
 public class M {
-    //a class to store the
+    //a class to store the code which can change the colour
     public static final String stop = "\u001B[0m";
     public static final String black = "\u001B[30m";
     public static final String red = "\u001B[31m";
