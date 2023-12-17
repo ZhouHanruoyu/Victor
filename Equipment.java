@@ -25,6 +25,7 @@ public class Equipment {
                     case 2:
                         return;
                     case 0:
+                        System.out.println(M.bold+"Thank for using,see you!"+M.stop);
                         System.exit(0);
                     default:
                         System.out.println(M.red+"Invalid option entered:"+M.stop+M.strikethrough+choice+M.stop);
