@@ -10,7 +10,7 @@ public class M {
     public static final String cyan = "\u001B[36m";
     public static final String white = "\u001B[37m";
 
-    // 背景颜色
+    // background colour
     public static final String blackbackground = "\u001B[40m";
     public static final String redbackground = "\u001B[41m";
     public static final String greenbackground = "\u001B[42m";
@@ -20,7 +20,7 @@ public class M {
     public static final String cyanbackground = "\u001B[46m";
     public static final String whitebackground = "\u001B[47m";
 
-    // 闪烁效果
+    // scintillation effect
     public static final String flash = "\u001B[5m";
     public static final String bold="\u001B[1m";
     public static final String italic="\u001B[3m";
