@@ -16,7 +16,7 @@ public class Club {
                         \u001B[33m---------------------------------------\u001B[0m
                     Enter in number:
                     Enter \u001B[31m'1'\u001B[0m to continue to create your club;
-                    Enter \u001B[31m'0'\u001B[0m to exit.
+                    Enter \u001B[31m'0'\u001B[0m to return.
                     \u001B[33m---------------------------------------\u001B[0m
                     """);
             try {
@@ -108,18 +108,18 @@ public class Club {
     }
     public void ExitClub(Scanner input){
         input.nextLine();
+        //call the function ListClubAndMembers(input)
         ListClubAndMembers(input);
+        //create a variable to judge if user want to exit from a club or return
         String exit;
         while (true) {
             System.out.println(M.underline+"Type in the member name to exit"+M.stop
                     +M.white+"\n(Type in 'over' to return):"+M.stop);
-            //assign what user type in to variable"search",trim()is to erase meaningless contents
+            //assign what user type in to variable"exit",trim()is to erase meaningless contents
             exit = input.nextLine().trim();
-
-            //create boolean variable"compare" to judge if what user type in exists in my program
+            //create boolean variable"compare" to judge if the member user type in exists in my program
             boolean compare=false;
             String LowerCaseSearch=exit.toLowerCase().trim();
-            //when user type in "over",return to last menu,
             for (int i=0;i<Members.size();i++) {
                 if (Members.get(i).contains(exit) || Members.get(i).toLowerCase().contains(LowerCaseSearch)) {
                     Members.remove(i);
@@ -138,7 +138,7 @@ public class Club {
                     +M.white+"\n(type in over to return)"+M.stop);
             String userInput = input.nextLine().trim();
             if (userInput.equals("over")) {
-                break; // exit loop if user inputs "over"
+                break; // exit loop if user inputs "over" and return to last menu
             }
         }
     }
