@@ -1,7 +1,9 @@
 import java.util.Scanner;
 
 public class Introduction {
+     //import Scanner and create an object "input" of Scanner
     Scanner input=new Scanner(System.in);
+    //modified interface variable
     public static final String INTRODUCTION = """
 Badminton, also known as shuttlecock, is a popular indoor sport played between two or four players.
 It is believed to have originated in India and was introduced to England in the 19th century as a game called 'Poona'.
@@ -22,10 +24,11 @@ such as the BWF World Championships and the Thomas Cup attracting top players fr
 Overall, badminton is a thrilling and exciting sport that requires skill, strategy, and athleticism.
 Whether you're a casual player or a serious competitor, there's always room for improvement and new challenges in this dynamic game.
             """;
-
+//get the content of INTRODUCTION
     public static String getIntroduction(){
         return INTRODUCTION;
     }
+    //used to print the following content
     public static void printIntroduction(){
         System.out.println("---------Introduction---------");
         System.out.println(Introduction.getIntroduction());
