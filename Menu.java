@@ -17,6 +17,9 @@ public class Menu {
     }
     //initialize the objects of all the other classes
     public Menu(){
+        /*
+        create the new objects of corresponding classes so that I can call the functions stored in them
+         */
         this.equipment=new Equipment();
         this.athlete=new Athlete();
         this.racket=new PurchaseRacket();
@@ -26,9 +29,9 @@ public class Menu {
     }
     /*
     show main menu
-    there exists three functions in main menu:
-    green hands' beginner guide,amateur viewing,club management.
-    whenever you want to exit program,press 0 .
+    there exists four functions in main menu:
+    green hands' beginner guide,amateur viewing,club management and purchasing.
+    when you want to exit program in any menu,press "0".
     To avoid bugs, I use many "input.nextLine()" functions,
     so press Enter button to continue when the program stops.
     */
@@ -70,9 +73,8 @@ public class Menu {
                 case 4:
                     showPurchaseMenu();
                 case 0:
-                    System.out.println("Thank for using,see you!");
+                    System.out.println(M.bold+"Thank for using,see you!"+M.stop);
                     System.exit(0);
-                    //monitor if the user's input is beyond what I have installed
                 default :
                     System.out.println(M.red+"Invalid option entered:"+M.stop+M.strikethrough+choice+M.stop);
                     System.out.println(M.white+"Press any button to continue"+M.stop);
@@ -84,11 +86,14 @@ public class Menu {
                 System.out.println(M.red+"Invalid option entered."+M.stop+M.strikethrough+e+M.stop);
                 input.nextLine();
             }
+            //monitor if the user's input is beyond what I have installed
         }while (true);
     }
     //show Green hand Menu
     public void showGreenhandMenu(){
         //the beginning is same to the aforementioned comment
+        //try/catch,case 0,and default are same
+        //also I have created new objects in other corresponding classes,so I can call the functions in them.
         do {
             System.out.println(M.green+"----------\u001B[4m\u001B[1m||Beginner Guide||\u001B[0m\u001B[32m-----------"+M.stop);
             System.out.println(M.white+M.greenbackground+"---------------------------------------"+M.stop);
@@ -121,7 +126,7 @@ public class Menu {
                         //return to the previous menu
                         return;
                     case 0:
-                        System.out.println("Thank for using,see you!");
+                        System.out.println(M.bold+"Thank for using,see you!"+M.stop);
                         System.exit(0);
                     default :
                         System.out.println(M.red+"Invalid option entered:"+M.stop+M.strikethrough+choice+M.stop);
@@ -151,17 +156,21 @@ public class Menu {
             String IMPUT=input.nextLine().trim();
             int choice = Integer.parseInt(IMPUT);
             switch (choice) {
+                //regard "input" as a parameter,so I can use Scanner"input" to get user's import in other classes.
+                //the other functions with "input" below are same
                 case 1:
+                    //call the non-static function"showEquipmentsMenu" stored in class "Equipment" through the object"equipment" created before
                     equipment.showEquipmentsMenu(input);
                     break;
                 case 2:
+                    //same as above
                     athlete.showAthleteMenu(input);
                     break;
                 case 3:
                     //return to last menu
                     return;
                 case 0:
-                    System.out.println("Thank for using,see you!");
+                    System.out.println(M.bold+"Thank for using,see you!"+M.stop);
                     System.exit(0);
                 default :
                     System.out.println(M.red+"Invalid option entered:"+M.stop+M.strikethrough+choice+M.stop);
@@ -177,6 +186,7 @@ public class Menu {
 
     }
     public void ClubManagement(){
+        //same as above
         do {
             System.out.println(M.yellow+"---\u001B[4m\u001B[1m||Club Management System||\u001B[0m\u001B[33m---"+M.stop);
             System.out.println(M.yellowbackground+M.white+"-------------------------------------"+M.stop);
@@ -213,7 +223,7 @@ public class Menu {
                     case 6:
                         return;
                     case 0:
-                        System.out.println("Thank for using,see you!");
+                        System.out.println(M.bold+"Thank for using,see you!"+M.stop);
                         System.exit(0);
                     default :
                         System.out.println(M.red+"Invalid option entered:"+M.stop+M.strikethrough+choice+M.stop);
@@ -229,21 +239,15 @@ public class Menu {
     }
     //show products menu
     public void showPurchaseMenu(){
+        //same as above
         do{
             System.out.println(M.purple+"-----\u001B[4m\u001B[1m||Products list||\u001B[0m\u001B[35m-----"+M.stop);
             System.out.println(M.purplebackground+M.blue+"-------------------------------------"+M.stop);
-            System.out.println(M.red+M.italic+M.underline+"1.Racket"+M.stop);
-            System.out.println(M.green+M.italic+M.underline+"2.Shoes"+M.stop);
-            System.out.println(M.red+M.italic+M.underline+"3.List chosen racket"+M.stop);
-            System.out.println(M.green+M.italic+M.underline+"4.List chosen shoes"+M.stop);
-            System.out.println(M.red+M.italic+M.underline+"5.Delete racket"+M.stop);
-            System.out.println(M.green+M.italic+M.underline+"6.Delete shoes"+M.stop);
-            System.out.println(M.black+M.italic+M.underline+"7.return"+M.stop);
+            System.out.println("1.Racket");
+            System.out.println("2.Shoes");
+            System.out.println("3.Return");
             System.out.println(M.purplebackground+M.blue+"-------------------------------------"+M.stop);
-            System.out.println(M.italic+M.white+"Please type in the number."+M.stop);
-            System.out.println(M.italic+M.white+"Whenever the program stops,"+M.stop);
-            System.out.println(M.italic+M.white+"press Enter button to continue."+M.stop);
-        try {
+            try {
             String IMPUT=input.nextLine().trim();
             int choice=Integer.parseInt(IMPUT);
         switch (choice){
@@ -254,21 +258,9 @@ public class Menu {
                 shoe.showPurchaseShoeMenu(input);
                 break;
             case 3:
-                racket.ListRackets(input);
-                break;
-            case 4:
-                shoe.ListShoes(input);
-                break;
-            case 5:
-                racket.DeleteRacket(input);
-                break;
-            case 6:
-                shoe.DeleteShoes(input);
-                break;
-            case 7:
                 return;
             case 0:
-                System.out.println("Thank for using,see you!");
+                System.out.println(M.bold+"Thank for using,see you!"+M.stop);
                 System.exit(0);
             default :
                 System.out.println(M.red+"Invalid option entered:"+M.stop+M.strikethrough+choice+M.stop);
@@ -282,9 +274,8 @@ public class Menu {
         }
        }while (true);
     }
-
-
 }
+
 
 
 
