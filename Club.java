@@ -79,19 +79,25 @@ public class Club {
             boolean compare=false;
             String LowerCaseSearch=dissolve.toLowerCase().trim();
             //when user type in "over",return to last menu,
-            for (int i=0;i<Members.size();i++) {
+            List<Integer> DissolveNumber = new ArrayList<>();
+
+            for (int i = 0; i < Members.size(); i++) {
                 if (Members.get(i).contains(dissolve) || Members.get(i).toLowerCase().contains(LowerCaseSearch)) {
-                    Members.remove(i);
+                    DissolveNumber.add(i);
                     compare = true;
-                    break; // stop loop after removing one match
+                    // stop loop after finding one match if necessary
                 }
+            }
+            // Remove elements after the loop
+            //avoid miss the club which should be delete
+            for (int i = DissolveNumber.size() - 1; i >= 0; i--) {
+                Members.remove((int)DissolveNumber.get(i));
             }
             if (!compare){
                 System.out.println(M.red+"Can't find the club you search"+M.stop);
             } else {
                 System.out.println(M.red+"Club has been removed successfully."+M.stop);
             }
-
             System.out.println(M.underline+"Press any button to continue"+M.stop
                     +M.white+"\n(type in over to return)"+M.stop);
             String userInput = input.nextLine().trim();
@@ -100,11 +106,16 @@ public class Club {
             }
         }
     }
-    public void ListClubAndMembers(Scanner input){
-        for (String member : Members) {
-            System.out.println("Club:" + member);
+    public void ListClubAndMembers(Scanner input) {
+        if (!Members.isEmpty()) {
+            for (String member : Members) {
+                System.out.println("Club:" + member);
+            }
+            input.nextLine();
         }
-        input.nextLine();
+        else {
+            System.out.println("Their exists no clubs");
+        }
     }
     public void ExitClub(Scanner input){
         input.nextLine();
@@ -120,12 +131,17 @@ public class Club {
             //create boolean variable"compare" to judge if the member user type in exists in my program
             boolean compare=false;
             String LowerCaseSearch=exit.toLowerCase().trim();
-            for (int i=0;i<Members.size();i++) {
+            List<Integer> ExitNumber = new ArrayList<>();
+            for (int i = 0; i < Members.size(); i++) {
                 if (Members.get(i).contains(exit) || Members.get(i).toLowerCase().contains(LowerCaseSearch)) {
-                    Members.remove(i);
+                    ExitNumber.add(i);
                     compare = true;
-                    break; // stop loop after removing one match
+                    // stop loop after finding one match if necessary
                 }
+            }
+            // Remove elements after the loop
+            for (int i = ExitNumber.size() - 1; i >= 0; i--) {
+                Members.remove((int)ExitNumber.get(i));
             }
 
             if (!compare){
