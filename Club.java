@@ -72,6 +72,7 @@ public class Club {
         while (true) {
             System.out.println(M.underline+"Type in the club name to dissolve"+M.stop
                     +M.white+"\n(Type in 'over' to return):"+M.stop);
+            System.out.println(M.bold+"Example:NUIST-zhry"+M.stop);
             //assign what user type in to variable"search",trim()is to erase meaningless contents
             dissolve = input.nextLine().trim();
 
@@ -126,6 +127,7 @@ public class Club {
         while (true) {
             System.out.println(M.underline+"Type in the member name to exit"+M.stop
                     +M.white+"\n(Type in 'over' to return):"+M.stop);
+            System.out.println(M.bold+"Example:NUIST-zhry"+M.stop);
             //assign what user type in to variable"exit",trim()is to erase meaningless contents
             exit = input.nextLine().trim();
             //create boolean variable"compare" to judge if the member user type in exists in my program
