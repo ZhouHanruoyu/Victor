@@ -1,0 +1,123 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+
+//-------------------------------------------
+//1.雷区初始化部分
+//生成随机数
+int randInt(int base, int range){
+    return base + rand()%range;
+}
+//构建棋盘，输入宽和高，返回动态分配的整数数组指针
+int *genField(int width, int height){
+    //初始化数组
+    int *mineField = (int*)malloc(sizeof(int)*width*height);
+    for(int i=0;i<width*height;i++)
+        mineField[i]=0; //全部初始化为0，表示无雷
+    return mineField; //返回数组指针
+}
+//检查随机数是否已经在数组中
+int isUnique(int r, int *rands, int len){
+    //检查随机数r在数组rands中是否存在，len为数组长度
+    for(int i=0;i<len;i++) if(rands[i]==r) return 1; //如果存在相同的随机数，返回1
+    return 0; //不存在相同的随机数，返回0
+}
+//生成一组不重复的随机整数
+//随机数的范围，数量
+//返回一组随机数构成的数组
+int *uniqueRandInts(int max, int num){
+    int *rands=(int *)malloc(sizeof(int)*num); //动态分配内存，存放随机数
+    //填充不重复的随机数
+    int count=0; //有效的不重复的随机数数量
+    int r;
+    while(count<num){
+        r=rand()%max; //生成随机数
+        //将r和已经生成的随机数序列进行比对
+        int result = isUnique(r, rands, count);
+        //检查随机数是否重复，若不重复则存入数组
+        if(result==0)
+            rands[count++]=r;
+    }
+    return rands; //返回随机数数组指针
+}
+void initField(int *mineField, int width, int height, int mines){
+    int *rands = uniqueRandInts(width*height, mines); //生成不重复的随机数
+    for(int i=0;i<mines;i++) mineField[rands[i]]=1; //在雷区中布雷，1表示有雷
+    free(rands); //释放随机数数组内存
+}
+//调试函数，打印雷区
+void debugField(int *mineField, int width, int height){
+    for(int y=0;y<height;y++){
+        for(int x=0;x<width;x++)
+            printf("%d\t", mineField[y*width + x]); //一维数组模拟二维数组
+        printf("\n");
+    }
+    printf("\n");
+}
+//-------------------------------------------
+//2.游戏部分
+//生成可视化显示雷区，初始状态全部为‘#’
+char * genDisplayField(int width, int height){
+    char *displayField = (char *)malloc(sizeof(char)*width*height);
+    for(int i=0;i<width*height;i++)
+        displayField[i]='#'; //初始化为‘#’，表示未翻开
+    return displayField; //返回显示雷区指针
+}
+
+void DisplayField(char *displayField, int width, int height){
+    //打印显示雷区,右侧和下方显示坐标
+    for(int y=0;y<height;y++){
+        for(int x=0;x<width;x++)
+            printf("%c\t", displayField[y*width + x]); //一维数组模拟二维数组
+        printf("| %d\n", y); //打印右侧坐标
+    }
+    //打印下方坐标
+    for(int x=0;x<width;x++)
+        printf("----\t");
+    printf("\n");
+    for(int x=0;x<width;x++)
+        printf("%d\t", x);
+}
+//输入雷区数组指针、宽度、高度
+//返回游戏结果，1表示胜利，0表示失败
+int Play(int *mineField, int width, int height, int mines){
+    char *displayField = genDisplayField(width, height); //生成显示雷区
+    int openedCells=0; //已翻开的格子数量
+    int result=1; //游戏结果，默认为胜利
+    DisplayField(displayField, width, height); //显示当前雷区
+    while(openedCells<mines){ //剩余没有翻开的格子数量不等于地雷数时，游戏继续
+        //显示可视化雷区，包括右侧和下方的坐标
+        
+        //人机交互获得用户输入的坐标
+        //点击格子，若返回-1表示踩雷，否则表示此坐标周围雷数
+        if(result==-1) //踩雷，游戏结束
+            return 0;
+        //否则将ret更新到显示雷区中对应的位置，表示周围地雷数
+        openedCells++; //已翻开的格子数量加1
+    }
+    free(displayField);
+    return 1; //释放显示雷区内存
+}
+//控制台“扫雷”
+int main(){
+    //---------------------------------------
+    //1.初始化部分
+    srand((unsigned)time(NULL));
+    int width=10, height=8, mines=15;//宽度、高度、地雷数量
+    printf("Welcome to MineSweeper!\n");
+    //生成雷区，整型数组，0表示无雷，1表示有雷
+    //malloc动态分配内存
+    int *mineField = genField(width, height);
+    //初始化雷区
+    initField(mineField, width, height, mines);
+    // debugField(mineField, width, height); //打印雷区，调试用
+    //---------------------------------------
+    //2.游戏部分
+    int result = Play(mineField, width, height,mines);
+    if(result==1)
+        printf("Congratulations! You Win!\n");
+    else if(result==0)
+        printf("Boom! You hit a mine. Game Over.\n");
+    return 0;
+}
